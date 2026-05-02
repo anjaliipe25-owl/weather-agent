@@ -1,16 +1,21 @@
 import requests
+import json
+import datetime
 
 # -----------------------------
 # 1. LOAD MEMORY (previous + max)
 # -----------------------------
 try:
-    file = open("memory.txt", "r")
-    content = file.read()
+    file = open("agent_state.json", "r")
+    history = json.load(file)
     file.close()
-    previous_temp, max_temp = content.split(",")
-    previous_temp = float(previous_temp)
-    max_temp = float(max_temp)
 except FileNotFoundError:
+    history = []
+
+if history:
+    previous_temp = history[-1]["temp"]
+    max_temp = history[-1]["temp"]
+else:
     previous_temp = 0
     max_temp = 0
 # -----------------------------
@@ -41,8 +46,9 @@ else:
 # -----------------------------
 # 5. UPDATE MEMORY
 # -----------------------------
-file = open("memory.txt", "w")
-file.write(f"{current_temp},{max_temp}")
+history.append({"temp": current_temp, "time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+file = open("agent_state.json", "w")
+json.dump(history, file)
 file.close()
 
 # -----------------------------
