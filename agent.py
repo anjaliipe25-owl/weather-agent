@@ -3,14 +3,16 @@ import requests
 # -----------------------------
 # 1. LOAD MEMORY (previous + max)
 # -----------------------------
-file = open("memory.txt", "r")
-content = file.read()
-file.close()
-
-previous_temp, max_temp = content.split(",")
-previous_temp = float(previous_temp)
-max_temp = float(max_temp)
-
+try:
+    file = open("memory.txt", "r")
+    content = file.read()
+    file.close()
+    previous_temp, max_temp = content.split(",")
+    previous_temp = float(previous_temp)
+    max_temp = float(max_temp)
+except FileNotFoundError:
+    previous_temp = 0
+    max_temp = 0
 # -----------------------------
 # 2. GET CURRENT TEMPERATURE (OBSERVE)
 # -----------------------------
