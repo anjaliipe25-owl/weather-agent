@@ -14,7 +14,7 @@ except FileNotFoundError:
 
 if history:
     previous_temp = history[-1]["temp"]
-    max_temp = history[-1]["temp"]
+    max_temp = max(entry["temp"] for entry in history)
 else:
     previous_temp = 0
     max_temp = 0
