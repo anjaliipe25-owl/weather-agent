@@ -8,3 +8,6 @@ with open("agent_state.json", "r") as f:
 
 df = pd.DataFrame(history)
 print(df)
+
+df["time"] = pd.to_datetime(df["time"], utc=True)
+print(df.dtypes)
