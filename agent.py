@@ -46,7 +46,7 @@ else:
 # -----------------------------
 # 5. UPDATE MEMORY
 # -----------------------------
-history.append({"temp": current_temp, "time": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+history.append({"temp": current_temp, "time": datetime.datetime.now(datetime.timezone.utc).isoformat()})
 file = open("agent_state.json", "w")
 json.dump(history, file)
 file.close()
