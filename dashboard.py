@@ -11,3 +11,4 @@ print(df)
 
 df["time"] = pd.to_datetime(df["time"], utc=True)
 print(df.dtypes)
+df["time"] = df["time"].dt.tz_convert("America/Chicago")
