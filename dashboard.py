@@ -11,6 +11,7 @@ df["time"] = pd.to_datetime(df["time"], utc=True)
 df["time"] = df["time"].dt.tz_convert("America/Chicago")
 df["temp_f"] = df["temp"] * 9/5 + 32
 st.title("🏕️ Camping Temperature Dashboard")
+st.metric(label="Current Temperature", value=f"{df['temp_f'].iloc[-1]:.1f}°F")
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=df["time"], y=df["temp_f"], mode="lines+markers", name="Temperature (°F)"))
 st.plotly_chart(fig)
